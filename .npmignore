@@ -1,0 +1,8 @@
+# npmignore
+node_modules
+webpack.config.js
+.babelrc
+.gitignore
+yarn.lock
+yarn-error.log
+.git
