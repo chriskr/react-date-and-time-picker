@@ -1,0 +1,30 @@
+html {
+  font: menu;
+}
+
+.input-container {
+  display: inline-block;
+}
+
+input {
+  font: inherit;
+  font-size: 14px;
+  height: 24px;
+  line-height: 24px;
+  width: 400px;
+}
+
+.date-time-picker-container {
+  position: relative;
+}
+
+.date-time-picker-container .dtp-root {
+  left: unset;
+  right: 0;
+  top: 1px;
+}
+
+
+
+
+
