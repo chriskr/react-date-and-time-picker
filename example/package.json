@@ -1,7 +1,8 @@
 {
   "name": "example",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage" : "https://chriskr.github.io/react-date-and-time-picker/example/build/",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
