@@ -6,3 +6,5 @@ webpack.config.js
 yarn.lock
 yarn-error.log
 .git
+example/node_modules
+example/build
