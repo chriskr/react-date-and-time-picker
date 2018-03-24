@@ -1,14 +1,15 @@
 {
-  "name": "dtp-npm",
+  "name": "react-date-and-time-picker",
   "version": "1.0.0",
+  "description": "React component to pick date and time (with material design icons).",
+  "repository": "https://github.com/chriskr/react-date-and-time-picker",
   "main": "index.js",
-  "author": "Christian Krebs <christian.krebs.pi@gmail.com>",
-  "license": "MIT",
+  "author": "chriskr",
+  "license": "Apache License 2.0",
   "scripts": {
     "watch": "cross-env NODE_ENV=development webpack -w --mode development --display-error-details",
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
-    "build:prod": "cross-env NODE_ENV=production webpack --mode production",
-    "h": "webpack -h"
+    "build:prod": "cross-env NODE_ENV=production webpack --mode production"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
