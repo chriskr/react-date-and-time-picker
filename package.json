@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "description": "React component to pick date and time (with material design icons).",
   "repository": "https://github.com/chriskr/react-date-and-time-picker",
+  "homepage": "https://chriskr.github.io/react-date-and-time-picker/example/build/",
   "main": "index.js",
   "author": "chriskr",
   "license": "Apache License 2.0",
+  "keywords": [
+    "date",
+    "time",
+    "react",
+    "picker"
+  ],
   "scripts": {
     "watch": "cross-env NODE_ENV=development webpack -w --mode development --display-error-details",
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
