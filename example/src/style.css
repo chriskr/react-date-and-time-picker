@@ -2,15 +2,50 @@ html {
   font: menu;
 }
 
+#main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: auto;
+  width: 400px;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: normal;
+  margin: 15vh 0 0;
+  text-align: left;
+}
+
+pre {
+  margin: 5vh 0
+}
+
+.repo-link {
+  margin-top: 15vh;
+  text-align: right;
+}
+
+a {
+  background-image: url(/cv/github.svg);
+  background-repeat: no-repeat;
+  background-size: 16px;
+  line-height: 22px;
+  padding-left: 20px;
+  white-space: pre;
+}
+
 .input-container {
   display: inline-block;
 }
 
 input {
+  box-sizing: border-box;
   font: inherit;
   font-size: 14px;
-  height: 24px;
+  height: 40pxpx;
   line-height: 24px;
+  padding: 1px 12px;
   width: 400px;
 }
 
@@ -19,6 +54,7 @@ input {
 }
 
 .date-time-picker-container .dtp-root {
+  background-color: white;
   left: unset;
   right: 0;
   top: 1px;
