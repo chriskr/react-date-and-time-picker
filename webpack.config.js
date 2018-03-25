@@ -71,6 +71,7 @@ if (isProduction) {
     output: {
       filename: 'main.min.js',
       path: path.resolve(__dirname, 'dist'),
+      libraryTarget: 'commonjs2',
     },
     optimization: {
       minimize: true,
