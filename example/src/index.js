@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DateTimePicker from 'react-date-and-time-picker/dist/main';
+import DateTimePicker from 'react-date-and-time-picker';
 import 'react-date-and-time-picker/dist/main.css';
 import './style.css';
 
@@ -10,7 +10,7 @@ const pickerContainer = document.querySelector('.date-time-picker-container');
 let date = new Date();
 date.setFullYear(1997);
 
-const updateInput = date => input.value = date.toGMTString(); 
+const updateInput = date => input.value = date.toGMTString();
 
 const onChange = newDate => {
   updateInput(newDate);
@@ -43,7 +43,7 @@ const handleClick = event => {
 
   } else if (!pickerContainer.contains(event.target)) {
     hide();
-  } 
+  }
 }
 
 updateInput(date);
