@@ -12,3 +12,17 @@ export function rotate(iterable, delta) {
 export function classes(...classNames) {
   return classNames.filter(Boolean).join(' ');
 }
+
+const defineProperty = (object, n, start) => {
+  Object.defineProperty(object, String(n), {
+    get: () => {
+      defineProperty(object, n + 1, start);
+      return n + start;
+    },
+  });
+  return object;
+};
+
+export function Enum (start = 1) {
+  return defineProperty([], 0, start);
+};

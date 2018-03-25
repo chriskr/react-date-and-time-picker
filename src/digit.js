@@ -28,7 +28,7 @@ const Digit = props => {
     [0.5, 21, 0],
   ].map(([x, y, alpha], index) => 
     <use key={index}
-         className={classes(DISPLAY_LIGHT, (mask >> index) & 1 ? 'on' : '')} 
+         className={classes(DISPLAY_LIGHT, (mask >> index) & 1 && 'on')}
          href="#dtp-digit-light" 
          transform={`translate(${x}, ${y}) rotate(${alpha})`} />
   );

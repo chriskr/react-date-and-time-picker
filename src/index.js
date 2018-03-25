@@ -1,6 +1,6 @@
 import React from 'react';
 import {MONTH_NAMES} from './ui_strings';
-import {classes} from './utils';
+import {classes, Enum} from './utils';
 import classNames from './classNames';
 import Month from './month';
 import SelectMonth from './selectMonth';
@@ -81,7 +81,7 @@ const [
   MONTHS,
   YEARS,
   TIME,
- ] = [1, 2, 3, 4];
+ ] = Enum();
 
 const modeViewsMap = new Map([
   [DAYS, VIEW_DAYS],
@@ -305,16 +305,16 @@ class DateTimePipcker extends React.Component {
             <i className={classes(MATERIAL_ICONS, ICON_CHEVRON_RIGHT)}/>
           </span>
         </div>
-        <div className={classes(MAIN_SECTION, 
-                                modeViewsMap.get(this.state.mode))} 
+        <div className={classes(MAIN_SECTION,
+                                modeViewsMap.get(this.state.mode))}
              ref={div => { this._pickerBody = div; }}>
           {this.getBody(year, month, selected)}
         </div>
         <div className={FOOTER_ROW}>
           <span className={classes(HOVER_SPAN, SELECT_TIME)}>
-            <i className={classes(MATERIAL_ICONS, 
-                                  this.state.mode === TIME ? 
-                                  ICON_EVENT : 
+            <i className={classes(MATERIAL_ICONS,
+                                  this.state.mode === TIME ?
+                                  ICON_EVENT :
                                   ICON_SCHEDULE)}/>
           </span>
           <span className={classes(HOVER_SPAN, SELECT_TODAY)}>

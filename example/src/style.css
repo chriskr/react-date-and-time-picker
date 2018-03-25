@@ -3,8 +3,6 @@ html {
 }
 
 #main {
-  display: flex;
-  flex-direction: column;
   height: 100%;
   margin: auto;
   width: 400px;
@@ -43,7 +41,7 @@ input {
   box-sizing: border-box;
   font: inherit;
   font-size: 14px;
-  height: 40pxpx;
+  height: 40px;
   line-height: 24px;
   padding: 1px 12px;
   width: 400px;
@@ -54,8 +52,7 @@ input {
 }
 
 .date-time-picker-container .dtp-root {
-  background-color: white;
-  left: unset;
+  left: auto;
   right: 0;
   top: 1px;
 }

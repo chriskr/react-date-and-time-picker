@@ -1,13 +1,15 @@
 .dtp-root {
+  background-color: white;
   border-radius: 3px;
   border: 1px solid hsl(0, 0%, 95%);
   box-shadow: 0 1px 2px hsla(0, 0%, 0%, .2);
   font-size: 14px;
   left: 0;
-  padding: 8px;
+  padding: 8px 12px;
   position: absolute;
   top: 0;
   user-select: none;
+  width: 256px;
 }
 
 .dtp-root .material-icons {
@@ -76,6 +78,10 @@
 .dtp-header-month.dtp-selected .material-icons,
 .dtp-header-year.dtp-selected .material-icons {
   display: block;
+}
+
+.dtp-filler {
+  flex: 1;
 }
 
 .dtp-main-section {
