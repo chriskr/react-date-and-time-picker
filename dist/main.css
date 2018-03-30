@@ -2,10 +2,12 @@
   background-color: white;
   border-radius: 3px;
   border: 1px solid hsl(0, 0%, 95%);
-  box-shadow: 0 1px 2px hsla(0, 0%, 0%, .2);
+  box-shadow: 0 1px 9px hsla(0, 0%, 0%, .4);
+  color: hsl(0, 0%, 25%);
   font-size: 14px;
   left: 0;
-  padding: 8px 12px;
+  overflow: hidden;
+  padding: 0 12px;
   position: absolute;
   top: 0;
   user-select: none;
@@ -26,27 +28,23 @@
   transition: box-shadow .1s;
 }
 
-.dtp-hover-span:hover,
-.dtp-td-months:hover > .dtp-hover-span,
-.dtp-td-years:hover > .dtp-hover-span {
-  box-shadow: 1px 1px 4px hsla(0, 0%, 0%, .2),
-              0 0 2px hsla(0, 0%, 0%, .2);
-}
-
 .dtp-header,
 .dtp-footer {
   align-items: center;
+  background-color: hsl(0, 0%, 98%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
   display: flex;
-  height: 32px;
+  height: 40px;
   justify-content: space-between;
-  line-height: 32px;
+  line-height: 40px;
+  margin: 0 -12px;
 }
 
 .dtp-footer {
   justify-content: space-around;
 }
 
-.dtp-previous-month, 
+.dtp-previous-month,
 .dtp-next-month {
   box-sizing: border-box;
   cursor: pointer;
@@ -57,27 +55,19 @@
 
 .dtp-header-month,
 .dtp-header-year {
-  font-weight: bold;
+  border-radius: 0;
+  border-width: 2px 0;
+  border: 2px solid transparent;
+  box-sizing: border-box;
   min-width: 40px;
   padding: 0 12px;
-  position: relative;
   text-align: center;
+  text-transform: uppercase;
 }
 
-.dtp-header-month .material-icons,
-.dtp-header-year .material-icons {
-  display: none;
-  height: 16px;
-  left: 0;
-  line-height: 16px;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-}
-
-.dtp-header-month.dtp-selected .material-icons,
-.dtp-header-year.dtp-selected .material-icons {
-  display: block;
+.dtp-header-month.dtp-selected,
+.dtp-header-year.dtp-selected {
+  border-bottom-color: rgba(0, 0, 0, .7);
 }
 
 .dtp-filler {
@@ -93,8 +83,8 @@
 
 .dtp-main-section.dtp-view-years,
 .dtp-main-section.dtp-view-time {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDIwIDAgTCA0MCAyMCAwIDIwIFoiIGZpbGw9ImhzbCgwLCAwJSwgOTUlKSIvPgo8L3N2Zz4=), 
-                    url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDAgMCBMIDQwIDAgMjAgMjAgWiIgZmlsbD0iaHNsKDAsIDAlLCA5NSUpIi8+Cjwvc3ZnPg==); 
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDIwIDAgTCA0MCAyMCAwIDIwIFoiIGZpbGw9ImhzbCgwLCAwJSwgOTUlKSIvPgo8L3N2Zz4=),
+                    url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDAgMCBMIDQwIDAgMjAgMjAgWiIgZmlsbD0iaHNsKDAsIDAlLCA5NSUpIi8+Cjwvc3ZnPg==);
   background-position: 50% 24px, 50% 168px;
   background-repeat: no-repeat;
 }
@@ -115,31 +105,46 @@
   padding: 0;
 }
 
+
+
 .dtp-th-day,
 .dtp-td-day {
   border: none;
   height: 28px;
   line-height: 28px;
   padding: 0;
-  text-align: right;
   width: 36px;
 }
 
-.dtp-td-day .dtp-hover-span {
-  padding: 0 8px 0 0;
+.dtp-select-day {
+  cursor: pointer;
 }
 
 .dtp-table .dtp-th-day  {
   font-weight: normal;
-  padding: 0 8px 0 0;
-  text-align: right;
+  padding: 0;
+  text-align: center;
+  width: 36px;
+}
+
+.dtp-th-day .dtp-hover-span,
+.dtp-td-day .dtp-hover-span {
+  border-radius: 19px;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
   width: 28px;
+}
+
+.dtp-td-day:hover .dtp-hover-span {
+  box-shadow: 1px 1px 4px hsla(0, 0%, 0%, .2),
+              0 0 2px hsla(0, 0%, 0%, .2);
 }
 
 .dtp-selected-day > .dtp-hover-span  {
   background-color: hsl(210, 100%, 50%);
-  color: hsl(0, 0%, 100%);
-  font-weight: bold;
+  color: white;
 }
 
 .dtp-table .dtp-td-years,
@@ -219,4 +224,8 @@
 
 .dtp-icon-expand-more::before {
   content: 'expand_more';
+}
+
+.dtp-transparent {
+  color: transparent;
 }

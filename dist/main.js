@@ -124,7 +124,8 @@ exports.default = {
   ICON_CANCEL: 'dtp-icon-cancel',
   ICON_EXPAND_LESS: 'dtp-icon-expand-less',
   ICON_EXPAND_MORE: 'dtp-icon-expand-more',
-  MATERIAL_ICONS: 'material-icons'
+  MATERIAL_ICONS: 'material-icons',
+  TRANSPARENT: 'dtp-transparent'
 };
 
 /***/ }),
@@ -658,14 +659,24 @@ var TD_DAY = _classNames2.default.TD_DAY,
     SELECT_DAY = _classNames2.default.SELECT_DAY,
     TH_DAY = _classNames2.default.TH_DAY,
     TABLE = _classNames2.default.TABLE,
-    HOVER_SPAN = _classNames2.default.HOVER_SPAN;
+    HOVER_SPAN = _classNames2.default.HOVER_SPAN,
+    TRANSPARENT = _classNames2.default.TRANSPARENT;
 
 
-var Week = function Week(_ref) {
-  var year = _ref.year,
-      month = _ref.month,
-      week = _ref.week,
-      selected = _ref.selected;
+var Day = function Day(_ref) {
+  var day = _ref.day;
+  return day < 10 ? [_react2.default.createElement(
+    'span',
+    { key: '1', className: TRANSPARENT },
+    '0'
+  ), day] : day;
+};
+
+var Week = function Week(_ref2) {
+  var year = _ref2.year,
+      month = _ref2.month,
+      week = _ref2.week,
+      selected = _ref2.selected;
 
   var weekRow = week.map(function (day, index) {
     var current = { year: year, month: month, day: day };
@@ -675,11 +686,11 @@ var Week = function Week(_ref) {
     return _react2.default.createElement(
       'td',
       { key: index,
-        className: (0, _utils.classes)(TD_DAY, isSelected && SELECTED_DAY) },
+        className: (0, _utils.classes)(TD_DAY, day > 0 && SELECT_DAY, isSelected && SELECTED_DAY) },
       day > 0 && _react2.default.createElement(
         'span',
-        { className: (0, _utils.classes)(HOVER_SPAN, SELECT_DAY) },
-        day
+        { className: (0, _utils.classes)(HOVER_SPAN) },
+        _react2.default.createElement(Day, { day: day })
       )
     );
   });
@@ -690,10 +701,10 @@ var Week = function Week(_ref) {
   );
 };
 
-var Month = function Month(_ref2) {
-  var year = _ref2.year,
-      month = _ref2.month,
-      selected = _ref2.selected;
+var Month = function Month(_ref3) {
+  var year = _ref3.year,
+      month = _ref3.month,
+      selected = _ref3.selected;
 
   var weeksOfMonth = (0, _dateExtensions.getWeeksOfMonth)(year, month);
   var weekDays = (0, _utils.rotate)(_ui_strings.WEEK_DAYS_SHORT, 1);
@@ -704,9 +715,9 @@ var Month = function Month(_ref2) {
       wday
     );
   });
-  var weekRows = weeksOfMonth.map(function (_ref3, index) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-        week = _ref4[1];
+  var weekRows = weeksOfMonth.map(function (_ref4, index) {
+    var _ref5 = _slicedToArray(_ref4, 2),
+        week = _ref5[1];
 
     return _react2.default.createElement(Week, _extends({ key: index }, { year: year, month: month, week: week, selected: selected }));
   });
@@ -831,7 +842,8 @@ var ROOT = _classNames2.default.ROOT,
     ICON_SCHEDULE = _classNames2.default.ICON_SCHEDULE,
     ICON_ADJUST = _classNames2.default.ICON_ADJUST,
     ICON_CANCEL = _classNames2.default.ICON_CANCEL,
-    MATERIAL_ICONS = _classNames2.default.MATERIAL_ICONS;
+    MATERIAL_ICONS = _classNames2.default.MATERIAL_ICONS,
+    TRANSPARENT = _classNames2.default.TRANSPARENT;
 
 
 var targetClassNames = [SELECT_DAY, SELECT_MONTH, SELECT_YEAR, SELECT_TIME, HEADER_MONTH, HEADER_YEAR, NEXT_MONTH, NEXT_HOUR, NEXT_MINUTE, PREVIOUS_MONTH, PREVIOUS_HOUR, PREVIOUS_MINUTE, SELECT_CALENDAR, SELECT_TODAY, CANCEL_CHANGES];
@@ -902,7 +914,7 @@ var DateTimePipcker = function (_React$Component) {
         case SELECT_DAY:
           {
             var date = new Date(this.state.date);
-            date.setDate(Number.parseInt(event.target.textContent, 10));
+            date.setDate(Number.parseInt(target.textContent, 10));
             this.props.onChange(date);
             break;
           }
@@ -1098,14 +1110,12 @@ var DateTimePipcker = function (_React$Component) {
           _react2.default.createElement(
             'span',
             { className: (0, _utils.classes)(HOVER_SPAN, HEADER_MONTH, this.state.mode === MONTHS && SELECTED) },
-            _ui_strings.MONTH_NAMES[month],
-            _react2.default.createElement('i', { className: (0, _utils.classes)(MATERIAL_ICONS, ICON_ARROW_DROP_UP) })
+            _ui_strings.MONTH_NAMES[month]
           ),
           _react2.default.createElement(
             'span',
             { className: (0, _utils.classes)(HOVER_SPAN, HEADER_YEAR, this.state.mode === YEARS && SELECTED) },
-            year,
-            _react2.default.createElement('i', { className: (0, _utils.classes)(MATERIAL_ICONS, ICON_ARROW_DROP_UP) })
+            year
           ),
           _react2.default.createElement('span', { className: FILLER }),
           _react2.default.createElement(

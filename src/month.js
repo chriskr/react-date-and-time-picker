@@ -12,19 +12,24 @@ const {
   TH_DAY,
   TABLE,
   HOVER_SPAN,
+  TRANSPARENT,
 } = classNames;
+
+const Day = ({day}) => day < 10 ? [<span key="1" className={TRANSPARENT}>0</span>, day] : day;
 
 const Week = ({year, month, week, selected}) => {
   const weekRow = week.map((day, index) => {
     const current = {year, month, day};
-    const isSelected = 
+    const isSelected =
         ['year', 'month', 'day'].every(
             prop => current[prop] === selected[prop]);
     return (
-      <td key={index} 
-          className={classes(TD_DAY, isSelected && SELECTED_DAY)}>
-        {day > 0 && 
-         <span className={classes(HOVER_SPAN, SELECT_DAY)}>{day}</span>
+      <td key={index}
+          className={classes(TD_DAY, day > 0 && SELECT_DAY, isSelected && SELECTED_DAY)} >
+        {day > 0 &&
+          <span className={classes(HOVER_SPAN)}>
+            <Day day={day}/>
+          </span>
         }
       </td>
     );
@@ -35,7 +40,7 @@ const Week = ({year, month, week, selected}) => {
 const Month = ({ year, month, selected}) => {
   const weeksOfMonth = getWeeksOfMonth(year, month);
   const weekDays = rotate(WEEK_DAYS_SHORT, 1);
-  const weekLabels = weekDays.map(wday => 
+  const weekLabels = weekDays.map(wday =>
       <th key={wday} className={TH_DAY}>{wday}</th>);
   const weekRows = weeksOfMonth.map(([,week], index) => (
     <Week key={index} {...{year, month, week, selected}} />

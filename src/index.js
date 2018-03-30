@@ -43,6 +43,7 @@ const {
   ICON_ADJUST,
   ICON_CANCEL,
   MATERIAL_ICONS,
+  TRANSPARENT,
 } = classNames;
 
 const targetClassNames = [
@@ -120,7 +121,7 @@ class DateTimePipcker extends React.Component {
     switch (className) {
       case SELECT_DAY: {
         const date = new Date(this.state.date);
-        date.setDate(Number.parseInt(event.target.textContent, 10));
+        date.setDate(Number.parseInt(target.textContent, 10));
         this.props.onChange(date);
         break;
       }
@@ -293,12 +294,10 @@ class DateTimePipcker extends React.Component {
           <span className={classes(HOVER_SPAN, HEADER_MONTH,
                                    this.state.mode === MONTHS && SELECTED)}>
             {MONTH_NAMES[month]}
-            <i className={classes(MATERIAL_ICONS, ICON_ARROW_DROP_UP)}/>
           </span>
           <span className={classes(HOVER_SPAN, HEADER_YEAR,
                                    this.state.mode === YEARS && SELECTED)}>
             {year}
-            <i className={classes(MATERIAL_ICONS, ICON_ARROW_DROP_UP)}/>
           </span>
           <span className={FILLER}/>
           <span className={classes(HOVER_SPAN, NEXT_MONTH)}>
