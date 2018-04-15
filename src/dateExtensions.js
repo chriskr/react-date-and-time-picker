@@ -4,6 +4,9 @@
  * Weeks starting on Monday.
  *
  * Code mainly from https://weeknumber.net/how-to/javascript
+ *
+ * @param {Date} date - A Date instance.
+ * @return {number} The week number of the year.
  */
 export function getWeekNumber(date) {
   const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -17,7 +20,7 @@ export function getWeekNumber(date) {
   // would be +|- 3/7, which is less than +|- 0.5 from the exacte week delta.
   return 1 +
       Math.round((d.getTime() - week1.getTime()) / (7 * 24 * 60 * 60 * 1000));
-};
+}
 
 /**
  * Gets the weeks of a month as tuples with week number and dates in that
@@ -26,6 +29,7 @@ export function getWeekNumber(date) {
  *
  * E.g. getWeeksOfMonth(2017, 10) returns
  *
+ * ```javascript
  *   [
  *     [44, [0, 0, 1, 2, 3, 4, 5]],
  *     [45, [6, 7, 8, 9, 10, 11, 12]],
@@ -33,6 +37,13 @@ export function getWeekNumber(date) {
  *     [47, [20, 21, 22, 23, 24, 25, 26]],
  *     [48, [27, 28, 29, 30, 0, 0, 0]]
  *   ]
+ * ```
+ *
+ * @param {number} year - The year.
+ * @param {number} month - The month.
+ * @param {boolean} [startWithMonday=true] - A boolean flag.
+ * @return {Array} List of the week tuples with week number and
+ * list of week days.
  *
  */
 export function getWeeksOfMonth(year, month, startWithMonday = true) {
@@ -40,6 +51,7 @@ export function getWeeksOfMonth(year, month, startWithMonday = true) {
   const date = new Date(year, month, day);
   let startDay = (date.getDay() + (startWithMonday ? 6 : 0)) % 7;
   let dayCount = 28;
+  // eslint-disable-next-line
   while (true) {
     date.setDate(dayCount + 1);
     if (date.getMonth() !== month) {
@@ -58,7 +70,6 @@ export function getWeeksOfMonth(year, month, startWithMonday = true) {
   date.setMonth(month);
   while (day <= dayCount) {
     date.setDate(day);
-    console.assert(date.getMonth() === month);
     week.push(day++);
     if (week.length === 7) {
       weeks.push([getWeekNumber(date), week]);
@@ -74,4 +85,4 @@ export function getWeeksOfMonth(year, month, startWithMonday = true) {
   }
 
   return weeks;
-};
+}

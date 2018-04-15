@@ -67,7 +67,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -145,7 +145,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(11);
+var _regenerator = __webpack_require__(12);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -188,14 +188,14 @@ function range(end) {
       }
     }
   }, _marked, this);
-};
+}
 
 function rotate(iterable, delta) {
   var l = iterable.length;
   return Array.from(range(l)).map(function (i) {
     return iterable[(i + delta) % l];
   });
-};
+}
 
 function classes() {
   for (var _len = arguments.length, classNames = Array(_len), _key = 0; _key < _len; _key++) {
@@ -219,10 +219,16 @@ function Enum() {
   var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
   return defineProperty([], 0, start);
-};
+}
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -240,7 +246,7 @@ var MONTH_NAMES = exports.MONTH_NAMES = ['January', 'February', 'March', 'April'
 var MONTH_NAMES_SHORT = exports.MONTH_NAMES_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -255,6 +261,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _classNames = __webpack_require__(0);
 
@@ -279,7 +289,8 @@ var Digit = function Digit(props) {
     return _react2.default.createElement('use', { key: index,
       className: (0, _utils.classes)(DISPLAY_LIGHT, mask >> index & 1 && 'on'),
       href: '#dtp-digit-light',
-      transform: 'translate(' + x + ', ' + y + ') rotate(' + alpha + ')' });
+      transform: 'translate(' + x + ', ' + y + ') rotate(' + alpha + ')'
+    });
   });
   return _react2.default.createElement(
     'g',
@@ -288,10 +299,15 @@ var Digit = function Digit(props) {
   );
 };
 
+Digit.propTypes = {
+  digit: _propTypes2.default.number,
+  pos: _propTypes2.default.number
+};
+
 exports.default = Digit;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -305,13 +321,17 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classNames = __webpack_require__(0);
 
 var _classNames2 = _interopRequireDefault(_classNames);
 
 var _utils = __webpack_require__(2);
 
-var _digit = __webpack_require__(4);
+var _digit = __webpack_require__(5);
 
 var _digit2 = _interopRequireDefault(_digit);
 
@@ -349,6 +369,11 @@ var Controls = function Controls(_ref) {
   );
 };
 
+Controls.propTypes = {
+  next: _propTypes2.default.string,
+  previous: _propTypes2.default.string
+};
+
 var Time = function Time(props) {
   var hours = props.hours,
       minutes = props.minutes;
@@ -362,12 +387,14 @@ var Time = function Time(props) {
       { viewBox: '0 0 140 51',
         width: '140px',
         height: '51px',
-        className: DIGITS },
+        className: DIGITS
+      },
       _react2.default.createElement(
         'defs',
         null,
         _react2.default.createElement('path', { id: 'dtp-digit-light',
-          d: 'M 0 0 L 2.5 2.5 17.5 2.5 20 0 17.5 -2.5 2.5 -2.5 Z' })
+          d: 'M 0 0 L 2.5 2.5 17.5 2.5 20 0 17.5 -2.5 2.5 -2.5 Z'
+        })
       ),
       _react2.default.createElement(
         'g',
@@ -392,10 +419,15 @@ var Time = function Time(props) {
   );
 };
 
+Time.propTypes = {
+  hours: _propTypes2.default.number,
+  minutes: _propTypes2.default.number
+};
+
 exports.default = Time;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -408,6 +440,10 @@ Object.defineProperty(exports, "__esModule", {
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _utils = __webpack_require__(2);
 
@@ -422,14 +458,12 @@ var TABLE = _classNames2.default.TABLE,
     SELECT_YEAR = _classNames2.default.SELECT_YEAR;
 
 
-var SelectMonth = function SelectMonth(_ref) {
-  var year = _ref.year,
-      month = _ref.month,
-      selected = _ref.selected;
+var SelectYear = function SelectYear(_ref) {
+  var startYear = _ref.year;
 
   var rows = [];
   var row = void 0;
-  Array.from((0, _utils.range)(year + 5, year - 4)).forEach(function (year, index) {
+  Array.from((0, _utils.range)(startYear + 5, startYear - 4)).forEach(function (year, index) {
     if (index % 3 === 0) {
       rows.push(row = []);
     }
@@ -450,21 +484,25 @@ var SelectMonth = function SelectMonth(_ref) {
     _react2.default.createElement(
       'tbody',
       null,
-      rows.map(function (row, index) {
+      rows.map(function (tableRow, index) {
         return _react2.default.createElement(
           'tr',
           { key: index },
-          row
+          tableRow
         );
       })
     )
   );
 };
 
-exports.default = SelectMonth;
+SelectYear.propTypes = {
+  year: _propTypes2.default.number
+};
+
+exports.default = SelectYear;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -478,7 +516,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ui_strings = __webpack_require__(3);
+var _ui_strings = __webpack_require__(4);
 
 var _classNames = __webpack_require__(0);
 
@@ -491,11 +529,7 @@ var TABLE = _classNames2.default.TABLE,
     SELECT_MONTH = _classNames2.default.SELECT_MONTH;
 
 
-var SelectMonth = function SelectMonth(_ref) {
-  var year = _ref.year,
-      month = _ref.month,
-      selected = _ref.selected;
-
+var SelectMonth = function SelectMonth() {
   var rows = [];
   var row = void 0;
   _ui_strings.MONTH_NAMES_SHORT.forEach(function (name, index) {
@@ -519,11 +553,11 @@ var SelectMonth = function SelectMonth(_ref) {
     _react2.default.createElement(
       'tbody',
       null,
-      rows.map(function (row, index) {
+      rows.map(function (tableRow, index) {
         return _react2.default.createElement(
           'tr',
           { key: index },
-          row
+          tableRow
         );
       })
     )
@@ -533,7 +567,7 @@ var SelectMonth = function SelectMonth(_ref) {
 exports.default = SelectMonth;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -550,6 +584,9 @@ exports.getWeeksOfMonth = getWeeksOfMonth;
  * Weeks starting on Monday.
  *
  * Code mainly from https://weeknumber.net/how-to/javascript
+ *
+ * @param {Date} date - A Date instance.
+ * @return {number} The week number of the year.
  */
 function getWeekNumber(date) {
   var d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -562,7 +599,7 @@ function getWeekNumber(date) {
   // Adjustment to Thursday in week 1 is not needed, the maximum adjustment
   // would be +|- 3/7, which is less than +|- 0.5 from the exacte week delta.
   return 1 + Math.round((d.getTime() - week1.getTime()) / (7 * 24 * 60 * 60 * 1000));
-};
+}
 
 /**
  * Gets the weeks of a month as tuples with week number and dates in that
@@ -571,6 +608,7 @@ function getWeekNumber(date) {
  *
  * E.g. getWeeksOfMonth(2017, 10) returns
  *
+ * ```javascript
  *   [
  *     [44, [0, 0, 1, 2, 3, 4, 5]],
  *     [45, [6, 7, 8, 9, 10, 11, 12]],
@@ -578,6 +616,13 @@ function getWeekNumber(date) {
  *     [47, [20, 21, 22, 23, 24, 25, 26]],
  *     [48, [27, 28, 29, 30, 0, 0, 0]]
  *   ]
+ * ```
+ *
+ * @param {number} year - The year.
+ * @param {number} month - The month.
+ * @param {boolean} [startWithMonday=true] - A boolean flag.
+ * @return {Array} List of the week tuples with week number and
+ * list of week days.
  *
  */
 function getWeeksOfMonth(year, month) {
@@ -587,6 +632,7 @@ function getWeeksOfMonth(year, month) {
   var date = new Date(year, month, day);
   var startDay = (date.getDay() + (startWithMonday ? 6 : 0)) % 7;
   var dayCount = 28;
+  // eslint-disable-next-line
   while (true) {
     date.setDate(dayCount + 1);
     if (date.getMonth() !== month) {
@@ -605,7 +651,6 @@ function getWeeksOfMonth(year, month) {
   date.setMonth(month);
   while (day <= dayCount) {
     date.setDate(day);
-    console.assert(date.getMonth() === month);
     week.push(day++);
     if (week.length === 7) {
       weeks.push([getWeekNumber(date), week]);
@@ -621,10 +666,10 @@ function getWeeksOfMonth(year, month) {
   }
 
   return weeks;
-};
+}
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -642,9 +687,13 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _dateExtensions = __webpack_require__(8);
+var _propTypes = __webpack_require__(3);
 
-var _ui_strings = __webpack_require__(3);
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _dateExtensions = __webpack_require__(9);
+
+var _ui_strings = __webpack_require__(4);
 
 var _utils = __webpack_require__(2);
 
@@ -672,6 +721,10 @@ var Day = function Day(_ref) {
   ), day] : day;
 };
 
+Day.propTypes = {
+  day: _propTypes2.default.number
+};
+
 var Week = function Week(_ref2) {
   var year = _ref2.year,
       month = _ref2.month,
@@ -686,7 +739,8 @@ var Week = function Week(_ref2) {
     return _react2.default.createElement(
       'td',
       { key: index,
-        className: (0, _utils.classes)(TD_DAY, day > 0 && SELECT_DAY, isSelected && SELECTED_DAY) },
+        className: (0, _utils.classes)(TD_DAY, day > 0 && SELECT_DAY, isSelected && SELECTED_DAY)
+      },
       day > 0 && _react2.default.createElement(
         'span',
         { className: (0, _utils.classes)(HOVER_SPAN) },
@@ -699,6 +753,13 @@ var Week = function Week(_ref2) {
     null,
     weekRow
   );
+};
+
+Week.propTypes = {
+  year: _propTypes2.default.number,
+  month: _propTypes2.default.number,
+  week: _propTypes2.default.array,
+  selected: _propTypes2.default.object
 };
 
 var Month = function Month(_ref3) {
@@ -741,23 +802,29 @@ var Month = function Month(_ref3) {
   );
 };
 
+Month.propTypes = {
+  year: _propTypes2.default.number,
+  month: _propTypes2.default.number,
+  selected: _propTypes2.default.object
+};
+
 exports.default = Month;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("regenerator-runtime");
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(10);
+module.exports = __webpack_require__(11);
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -775,7 +842,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ui_strings = __webpack_require__(3);
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _ui_strings = __webpack_require__(4);
 
 var _utils = __webpack_require__(2);
 
@@ -783,23 +854,23 @@ var _classNames = __webpack_require__(0);
 
 var _classNames2 = _interopRequireDefault(_classNames);
 
-var _month = __webpack_require__(9);
+var _month = __webpack_require__(10);
 
 var _month2 = _interopRequireDefault(_month);
 
-var _selectMonth = __webpack_require__(7);
+var _selectMonth = __webpack_require__(8);
 
 var _selectMonth2 = _interopRequireDefault(_selectMonth);
 
-var _selectYear = __webpack_require__(6);
+var _selectYear = __webpack_require__(7);
 
 var _selectYear2 = _interopRequireDefault(_selectYear);
 
-var _time = __webpack_require__(5);
+var _time = __webpack_require__(6);
 
 var _time2 = _interopRequireDefault(_time);
 
-__webpack_require__(20);
+__webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -837,13 +908,11 @@ var ROOT = _classNames2.default.ROOT,
     FILLER = _classNames2.default.FILLER,
     ICON_CHEVRON_LEFT = _classNames2.default.ICON_CHEVRON_LEFT,
     ICON_CHEVRON_RIGHT = _classNames2.default.ICON_CHEVRON_RIGHT,
-    ICON_ARROW_DROP_UP = _classNames2.default.ICON_ARROW_DROP_UP,
     ICON_EVENT = _classNames2.default.ICON_EVENT,
     ICON_SCHEDULE = _classNames2.default.ICON_SCHEDULE,
     ICON_ADJUST = _classNames2.default.ICON_ADJUST,
     ICON_CANCEL = _classNames2.default.ICON_CANCEL,
-    MATERIAL_ICONS = _classNames2.default.MATERIAL_ICONS,
-    TRANSPARENT = _classNames2.default.TRANSPARENT;
+    MATERIAL_ICONS = _classNames2.default.MATERIAL_ICONS;
 
 
 var targetClassNames = [SELECT_DAY, SELECT_MONTH, SELECT_YEAR, SELECT_TIME, HEADER_MONTH, HEADER_YEAR, NEXT_MONTH, NEXT_HOUR, NEXT_MINUTE, PREVIOUS_MONTH, PREVIOUS_HOUR, PREVIOUS_MINUTE, SELECT_CALENDAR, SELECT_TODAY, CANCEL_CHANGES];
@@ -855,8 +924,8 @@ var targetQuery = targetClassNames.map(function (className) {
 var getTarget = function getTarget(event) {
   var target = event.target.closest(targetQuery);
   if (target) {
-    var className = targetClassNames.find(function (className) {
-      return target.classList.contains(className);
+    var className = targetClassNames.find(function (targetClassName) {
+      return target.classList.contains(targetClassName);
     });
     return { target: target, className: className };
   }
@@ -951,6 +1020,7 @@ var DateTimePipcker = function (_React$Component) {
                   }
                   _date2.setMinutes(minutes + _delta2);
                   this.props.onChange(_date2);
+                  break;
                 }
 
               default:
@@ -1077,7 +1147,8 @@ var DateTimePipcker = function (_React$Component) {
 
         case TIME:
           return _react2.default.createElement(_time2.default, { hours: this.state.date.getHours(),
-            minutes: this.state.date.getMinutes() });
+            minutes: this.state.date.getMinutes()
+          });
         default:
 
       }
@@ -1097,7 +1168,10 @@ var DateTimePipcker = function (_React$Component) {
       };
       return _react2.default.createElement(
         'div',
-        { className: ROOT, onClick: this.onClick, onWheel: this.onWheel },
+        { className: ROOT,
+          onClick: this.onClick,
+          onWheel: this.onWheel
+        },
         _react2.default.createElement(
           'div',
           { className: HEADER_ROW },
@@ -1109,12 +1183,14 @@ var DateTimePipcker = function (_React$Component) {
           _react2.default.createElement('span', { className: FILLER }),
           _react2.default.createElement(
             'span',
-            { className: (0, _utils.classes)(HOVER_SPAN, HEADER_MONTH, this.state.mode === MONTHS && SELECTED) },
+            { className: (0, _utils.classes)(HOVER_SPAN, HEADER_MONTH, this.state.mode === MONTHS && SELECTED)
+            },
             _ui_strings.MONTH_NAMES[month]
           ),
           _react2.default.createElement(
             'span',
-            { className: (0, _utils.classes)(HOVER_SPAN, HEADER_YEAR, this.state.mode === YEARS && SELECTED) },
+            { className: (0, _utils.classes)(HOVER_SPAN, HEADER_YEAR, this.state.mode === YEARS && SELECTED)
+            },
             year
           ),
           _react2.default.createElement('span', { className: FILLER }),
@@ -1126,10 +1202,11 @@ var DateTimePipcker = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: (0, _utils.classes)(MAIN_SECTION, modeViewsMap.get(this.state.mode)),
-            ref: function ref(div) {
+          { ref: function ref(div) {
               _this2._pickerBody = div;
-            } },
+            },
+            className: (0, _utils.classes)(MAIN_SECTION, modeViewsMap.get(this.state.mode))
+          },
           this.getBody(year, month, selected)
         ),
         _react2.default.createElement(
@@ -1138,7 +1215,8 @@ var DateTimePipcker = function (_React$Component) {
           _react2.default.createElement(
             'span',
             { className: (0, _utils.classes)(HOVER_SPAN, SELECT_TIME) },
-            _react2.default.createElement('i', { className: (0, _utils.classes)(MATERIAL_ICONS, this.state.mode === TIME ? ICON_EVENT : ICON_SCHEDULE) })
+            _react2.default.createElement('i', { className: (0, _utils.classes)(MATERIAL_ICONS, this.state.mode === TIME ? ICON_EVENT : ICON_SCHEDULE)
+            })
           ),
           _react2.default.createElement(
             'span',
@@ -1158,17 +1236,22 @@ var DateTimePipcker = function (_React$Component) {
   return DateTimePipcker;
 }(_react2.default.Component);
 
+DateTimePipcker.propTypes = {
+  date: _propTypes2.default.instanceOf(Date),
+  onChange: _propTypes2.default.func
+};
+
 exports.default = DateTimePipcker;
 
 /***/ }),
-/* 13 */,
 /* 14 */,
 /* 15 */,
 /* 16 */,
 /* 17 */,
 /* 18 */,
 /* 19 */,
-/* 20 */
+/* 20 */,
+/* 21 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

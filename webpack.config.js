@@ -5,6 +5,12 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
+const eslintLoader = {
+  enforce: 'pre',
+  test: /\.js$/,
+  exclude: /node_modules/,
+  loader: 'eslint-loader',
+};
 const babelLoader = {
   loader: 'babel-loader',
   test: /.js$/,
@@ -60,11 +66,13 @@ const baseConfig = {
 module.exports.push(baseConfig);
 
 if (isProduction) {
+  baseConfig.module.rules.unshift(eslintLoader);
   Object.assign(baseConfig, {
     externals: {
       'react': 'react',
       'react-dom': 'react-dom',
       'regenerator-runtime': 'regenerator-runtime',
+      'prop-types': 'prop-types',
     },
   });
   module.exports.push(Object.assign({}, baseConfig, {
@@ -78,6 +86,7 @@ if (isProduction) {
     },
     module: {
       rules: [
+        eslintLoader,
         babelLoader,
         urlLoader,
         cssExtractor({

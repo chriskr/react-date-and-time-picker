@@ -54,12 +54,24 @@ input {
   font: inherit;
   height: 40px;
   line-height: 40px;
-  padding: 1px 12px;
+  padding: 1px 40px 1px 12px;
   width: 282px;
 }
 
 input:focus {
   outline: none;
+}
+
+.icon-event::before {
+  content: 'event';
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  margin-left: -40px;
+  pointer-events: none;
+  text-align: center;
+  vertical-align: top;
+  width: 40px;
 }
 
 .date-time-picker-container {

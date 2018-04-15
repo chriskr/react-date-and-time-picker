@@ -35,7 +35,7 @@ export const MONTH_NAMES = [
 
 export const MONTH_NAMES_SHORT = [
   'Jan',
-  'Feb', 
+  'Feb',
   'Mar',
   'Apr',
   'May',
@@ -43,7 +43,7 @@ export const MONTH_NAMES_SHORT = [
   'July',
   'Aug',
   'Sept',
-  'Oct', 
+  'Oct',
   'Nov',
   'Dec',
 ];

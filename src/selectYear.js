@@ -1,17 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {range} from './utils';
 import classNames from './classNames';
 
 const {TABLE, HOVER_SPAN, SELECT_YEAR} = classNames;
 
-const SelectMonth = ({year, month, selected}) => {
+const SelectYear = ({year: startYear}) => {
   const rows = [];
-  let row; 
-  Array.from(range(year + 5, year - 4)).forEach((year, index) => {
+  let row;
+  Array.from(range(startYear + 5, startYear - 4)).forEach((year, index) => {
     if (index % 3 === 0) {
       rows.push(row = []);
     }
-    row.push( 
+    row.push(
       <td key={index} className={SELECT_YEAR}>
         <span className={HOVER_SPAN}>{year}</span>
       </td>
@@ -20,9 +21,15 @@ const SelectMonth = ({year, month, selected}) => {
 
   return (
     <table className={TABLE}>
-      <tbody>{rows.map((row, index) => <tr key={index}>{row}</tr>)}</tbody>
+      <tbody>{rows.map((tableRow, index) =>
+        <tr key={index}>{tableRow}</tr>)}
+      </tbody>
     </table>
   );
 };
 
-export default SelectMonth;
+SelectYear.propTypes = {
+  year: PropTypes.number,
+};
+
+export default SelectYear;

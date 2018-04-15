@@ -6,48 +6,45 @@ import './style.css';
 
 const input = document.querySelector('input');
 const pickerContainer = document.querySelector('.date-time-picker-container');
-
 let date = new Date();
-date.setFullYear(1997);
 
-const updateInput = date => input.value = date.toGMTString();
+const renderPicker = () => {
+  const picker = React.createElement(DateTimePicker, {
+    date,
+    onChange,
+  });
+  ReactDOM.render(picker, pickerContainer);
+};
+
+const removePicker = () => {
+  ReactDOM.unmountComponentAtNode(pickerContainer);
+};
 
 const onChange = newDate => {
   updateInput(newDate);
   date = newDate;
-  show();
+  renderPicker();
 };
 
-input.addEventListener('input', () => {
+const updateInput = date => input.value = date.toGMTString();
+
+const onClick = event => {
+  if (!(pickerContainer.contains(event.target) || event.target === input)) {
+    removePicker();
+  }
+};
+
+const onInput = () => {
   const newDate = new Date(input.value);
   if (Number.isInteger(newDate.getTime())) {
     date = newDate;
-    show();
+    renderPicker();
   }
-});
-
-const show = () => {
-  const pane = React.createElement(DateTimePicker, {
-    date,
-    onChange,
-  });
-  ReactDOM.render(pane, pickerContainer);
 };
 
-const hide = () => {
-  ReactDOM.unmountComponentAtNode(pickerContainer);
-}
-
-const handleClick = event => {
-  if (event.target === input) {
-
-  } else if (!pickerContainer.contains(event.target)) {
-    hide();
-  }
-}
-
+input.addEventListener('focus', renderPicker);
+input.addEventListener('input', onInput);
+document.addEventListener('click', onClick);
 updateInput(date);
-input.addEventListener('focus', show);
-document.addEventListener('click', handleClick);
 
 

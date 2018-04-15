@@ -8,3 +8,4 @@ yarn-error.log
 .git
 example/node_modules
 example/build
+out

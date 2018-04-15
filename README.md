@@ -1,4 +1,4 @@
-# react-date-and-time-picker v1.0.5
+# react-date-and-time-picker
 
 ## Installation
 

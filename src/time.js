@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from './classNames';
 import {classes} from './utils';
 import Digit from './digit';
@@ -28,18 +29,25 @@ const Controls = ({next, previous}) =>
   </div>
 ;
 
+Controls.propTypes = {
+  next: PropTypes.string,
+  previous: PropTypes.string,
+};
+
 const Time = (props) => {
   const {hours, minutes} = props;
   return (
     <div className={TIME_CONTAINER}>
       <Controls previous={PREVIOUS_HOUR} next={NEXT_HOUR}/>
-      <svg viewBox="0 0 140 51" 
-           width="140px" 
-           height="51px" 
-           className={DIGITS}>
+      <svg viewBox="0 0 140 51"
+        width="140px"
+        height="51px"
+        className={DIGITS}
+      >
         <defs>
-          <path id="dtp-digit-light" 
-                d="M 0 0 L 2.5 2.5 17.5 2.5 20 0 17.5 -2.5 2.5 -2.5 Z" />
+          <path id="dtp-digit-light"
+            d="M 0 0 L 2.5 2.5 17.5 2.5 20 0 17.5 -2.5 2.5 -2.5 Z"
+          />
         </defs>
         <g>
           <Digit digit={(hours / 10) | 0} pos={1}/>
@@ -56,7 +64,12 @@ const Time = (props) => {
       </svg>
       <Controls previous={PREVIOUS_MINUTE} next={NEXT_MINUTE}/>
     </div>
-  )
-}
+  );
+};
+
+Time.propTypes = {
+  hours: PropTypes.number,
+  minutes: PropTypes.number,
+};
 
 export default Time;

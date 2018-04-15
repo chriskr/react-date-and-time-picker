@@ -8,15 +8,15 @@ const {
   SELECT_MONTH,
 } = classNames;
 
-const SelectMonth = ({ year, month, selected}) => {
+const SelectMonth = () => {
   const rows = [];
-  let row; 
+  let row;
   MONTH_NAMES_SHORT.forEach((name, index) => {
     if (index % 3 === 0) {
       row = [];
       rows.push(row);
     }
-    row.push( 
+    row.push(
       <td key={index} data-month={String(index)} className={SELECT_MONTH}>
         <span className={HOVER_SPAN}>{name}</span>
       </td>
@@ -25,7 +25,7 @@ const SelectMonth = ({ year, month, selected}) => {
   return (
     <table className={TABLE}>
       <tbody>
-        {rows.map((row, index) => <tr key={index}>{row}</tr>)}
+        {rows.map((tableRow, index) => <tr key={index}>{tableRow}</tr>)}
       </tbody>
     </table>
   );

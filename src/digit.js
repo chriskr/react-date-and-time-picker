@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from './classNames';
 import {classes} from './utils';
 
@@ -26,17 +27,23 @@ const Digit = props => {
     [0, 21.5, 90],
     [0, 0.5, 90],
     [0.5, 21, 0],
-  ].map(([x, y, alpha], index) => 
+  ].map(([x, y, alpha], index) =>
     <use key={index}
-         className={classes(DISPLAY_LIGHT, (mask >> index) & 1 && 'on')}
-         href="#dtp-digit-light" 
-         transform={`translate(${x}, ${y}) rotate(${alpha})`} />
+      className={classes(DISPLAY_LIGHT, (mask >> index) & 1 && 'on')}
+      href="#dtp-digit-light"
+      transform={`translate(${x}, ${y}) rotate(${alpha})`}
+    />
   );
   return (
     <g transform={`translate(${props.pos === 1 ? 4.5 : 32.5}, 4.5)`}>
       {lights}
-    </g>    
+    </g>
   );
-}
+};
+
+Digit.propTypes = {
+  digit: PropTypes.number,
+  pos: PropTypes.number,
+};
 
 export default Digit;
