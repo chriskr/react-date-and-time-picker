@@ -83,14 +83,14 @@
 
 .dtp-main-section.dtp-view-years,
 .dtp-main-section.dtp-view-time {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDIwIDAgTCA0MCAyMCAwIDIwIFoiIGZpbGw9ImhzbCgwLCAwJSwgOTUlKSIvPgo8L3N2Zz4=),
-                    url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDAgMCBMIDQwIDAgMjAgMjAgWiIgZmlsbD0iaHNsKDAsIDAlLCA5NSUpIi8+Cjwvc3ZnPg==);
-  background-position: 50% 22px, 50% 166px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjUiIHdpZHRoPSI2MCIgaGVpZ2h0PSI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZyBmaWxsPSJoc2woMCwgMCUsIDkyJSkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAwKSByb3RhdGUoNDUpIj4KICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyOCIgaGVpZ2h0PSI1IiByeD0iMi41IiByeT0iMi41IiAvPgogICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjUiIGhlaWdodD0iMjgiIHJ4PSIyLjUiIHJ5PSIyLjUiIC8+CiAgPC9nPgo8L3N2Zz4=),
+                    url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgMjUiIHdpZHRoPSI2MCIgaGVpZ2h0PSI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZyBmaWxsPSJoc2woMCwgMCUsIDkyJSkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyNSkgcm90YXRlKC0xMzUpIj4KICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyOCIgaGVpZ2h0PSI1IiByeD0iMi41IiByeT0iMi41IiAvPgogICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjUiIGhlaWdodD0iMjgiIHJ4PSIyLjUiIHJ5PSIyLjUiIC8+CiAgPC9nPgo8L3N2Zz4=);
+  background-position: 50% 10px, 50% 158px;
   background-repeat: no-repeat;
 }
 
 .dtp-main-section.dtp-view-time {
-  background-position: 50% 30px, 50% 158px;
+  background-position: 50% 22px, 50% 146px;
 }
 
 .dtp-table {

@@ -144,10 +144,13 @@ module.exports = require("react");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.TargetManager = undefined;
 
 var _regenerator = __webpack_require__(12);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 exports.range = range;
 exports.rotate = rotate;
@@ -155,6 +158,8 @@ exports.classes = classes;
 exports.Enum = Enum;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var _marked = /*#__PURE__*/_regenerator2.default.mark(range);
 
@@ -220,6 +225,42 @@ function Enum() {
 
   return defineProperty([], 0, start);
 }
+
+var TargetManager = exports.TargetManager = function () {
+  function TargetManager(config) {
+    var _this = this;
+
+    _classCallCheck(this, TargetManager);
+
+    this._targetClassNames = new Map();
+    this._targetQueries = new Map();
+    Object.keys(config).forEach(function (eventType) {
+      var classNames = config[eventType];
+      _this._targetClassNames.set(eventType, classNames);
+      _this._targetQueries.set(eventType, classNames.map(function (className) {
+        return '.' + className;
+      }).join(', '));
+    });
+  }
+
+  _createClass(TargetManager, [{
+    key: 'getTarget',
+    value: function getTarget(event) {
+      var eventType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : event.type;
+
+      var target = event.target.closest(this._targetQueries.get(eventType));
+      if (target) {
+        var className = this._targetClassNames.get(eventType).find(function (targetClassName) {
+          return target.classList.contains(targetClassName);
+        });
+        return { target: target, className: className };
+      }
+      return {};
+    }
+  }]);
+
+  return TargetManager;
+}();
 
 /***/ }),
 /* 3 */
@@ -622,7 +663,7 @@ function getWeekNumber(date) {
  * @param {number} month - The month.
  * @param {boolean} [startWithMonday=true] - A boolean flag.
  * @return {Array} List of the week tuples with week number and
- * list of week days.
+ *                 list of week days.
  *
  */
 function getWeeksOfMonth(year, month) {
@@ -915,22 +956,9 @@ var ROOT = _classNames2.default.ROOT,
     MATERIAL_ICONS = _classNames2.default.MATERIAL_ICONS;
 
 
-var targetClassNames = [SELECT_DAY, SELECT_MONTH, SELECT_YEAR, SELECT_TIME, HEADER_MONTH, HEADER_YEAR, NEXT_MONTH, NEXT_HOUR, NEXT_MINUTE, PREVIOUS_MONTH, PREVIOUS_HOUR, PREVIOUS_MINUTE, SELECT_CALENDAR, SELECT_TODAY, CANCEL_CHANGES];
-
-var targetQuery = targetClassNames.map(function (className) {
-  return '.' + className;
-}).join(', ');
-
-var getTarget = function getTarget(event) {
-  var target = event.target.closest(targetQuery);
-  if (target) {
-    var className = targetClassNames.find(function (targetClassName) {
-      return target.classList.contains(targetClassName);
-    });
-    return { target: target, className: className };
-  }
-  return {};
-};
+var targetManager = new _utils.TargetManager({
+  click: [SELECT_DAY, SELECT_MONTH, SELECT_YEAR, SELECT_TIME, HEADER_MONTH, HEADER_YEAR, NEXT_MONTH, NEXT_HOUR, NEXT_MINUTE, PREVIOUS_MONTH, PREVIOUS_HOUR, PREVIOUS_MINUTE, SELECT_CALENDAR, SELECT_TODAY, CANCEL_CHANGES]
+});
 
 var _Enum = (0, _utils.Enum)(),
     _Enum2 = _slicedToArray(_Enum, 4),
@@ -975,9 +1003,9 @@ var DateTimePipcker = function (_React$Component) {
   }, {
     key: 'onClick',
     value: function onClick(event) {
-      var _getTarget = getTarget(event),
-          target = _getTarget.target,
-          className = _getTarget.className;
+      var _targetManager$getTar = targetManager.getTarget(event),
+          target = _targetManager$getTar.target,
+          className = _targetManager$getTar.className;
 
       switch (className) {
         case SELECT_DAY:

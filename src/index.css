@@ -85,12 +85,12 @@
 .dtp-main-section.dtp-view-time {
   background-image: url('./arrow_up.svg'),
                     url('./arrow_down.svg');
-  background-position: 50% 22px, 50% 166px;
+  background-position: 50% 10px, 50% 158px;
   background-repeat: no-repeat;
 }
 
 .dtp-main-section.dtp-view-time {
-  background-position: 50% 30px, 50% 158px;
+  background-position: 50% 22px, 50% 146px;
 }
 
 .dtp-table {

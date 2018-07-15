@@ -43,7 +43,7 @@ export function getWeekNumber(date) {
  * @param {number} month - The month.
  * @param {boolean} [startWithMonday=true] - A boolean flag.
  * @return {Array} List of the week tuples with week number and
- * list of week days.
+ *                 list of week days.
  *
  */
 export function getWeeksOfMonth(year, month, startWithMonday = true) {

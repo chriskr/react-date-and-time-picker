@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {MONTH_NAMES} from './ui_strings';
-import {classes, Enum} from './utils';
+import {classes, Enum, TargetManager} from './utils';
 import classNames from './classNames';
 import Month from './month';
 import SelectMonth from './selectMonth';
@@ -45,36 +45,25 @@ const {
   MATERIAL_ICONS,
 } = classNames;
 
-const targetClassNames = [
-  SELECT_DAY,
-  SELECT_MONTH,
-  SELECT_YEAR,
-  SELECT_TIME,
-  HEADER_MONTH,
-  HEADER_YEAR,
-  NEXT_MONTH,
-  NEXT_HOUR,
-  NEXT_MINUTE,
-  PREVIOUS_MONTH,
-  PREVIOUS_HOUR,
-  PREVIOUS_MINUTE,
-  SELECT_CALENDAR,
-  SELECT_TODAY,
-  CANCEL_CHANGES,
-];
-
-const targetQuery =
-    targetClassNames.map(className => `.${className}`).join(', ');
-
-const getTarget = event => {
-  const target = event.target.closest(targetQuery);
-  if (target) {
-    const className = targetClassNames.find(
-      targetClassName => target.classList.contains(targetClassName));
-    return {target, className};
-  }
-  return {};
-};
+const targetManager = new TargetManager({
+  click: [
+    SELECT_DAY,
+    SELECT_MONTH,
+    SELECT_YEAR,
+    SELECT_TIME,
+    HEADER_MONTH,
+    HEADER_YEAR,
+    NEXT_MONTH,
+    NEXT_HOUR,
+    NEXT_MINUTE,
+    PREVIOUS_MONTH,
+    PREVIOUS_HOUR,
+    PREVIOUS_MINUTE,
+    SELECT_CALENDAR,
+    SELECT_TODAY,
+    CANCEL_CHANGES,
+  ],
+});
 
 const [
   DAYS,
@@ -115,7 +104,7 @@ class DateTimePipcker extends React.Component {
   }
 
   onClick (event) {
-    const {target, className} = getTarget(event);
+    const {target, className} = targetManager.getTarget(event);
 
     switch (className) {
     case SELECT_DAY: {
