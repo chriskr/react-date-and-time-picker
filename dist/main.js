@@ -144,7 +144,7 @@ module.exports = require("react");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TargetManager = undefined;
+exports.getDefaultLineHeight = exports.TargetManager = undefined;
 
 var _regenerator = __webpack_require__(12);
 
@@ -261,6 +261,19 @@ var TargetManager = exports.TargetManager = function () {
 
   return TargetManager;
 }();
+
+var getDefaultLineHeight = exports.getDefaultLineHeight = function getDefaultLineHeight() {
+  var iframe = document.createElement('iframe');
+  iframe.src = 'about:blank';
+  document.body.appendChild(iframe);
+  var iframeDocument = iframe.contentWindow.document;
+  var span = iframeDocument.createElement('span');
+  iframeDocument.body.appendChild(span);
+  span.textContent = 'a';
+  var lineHeight = span.offsetHeight;
+  iframe.remove();
+  return lineHeight;
+};
 
 /***/ }),
 /* 3 */
@@ -971,6 +984,16 @@ var modeViewsMap = new Map([[DAYS, VIEW_DAYS], [MONTHS, VIEW_MONTHS], [YEARS, VI
 
 var TRACK_PAD_SCROLL_THRESHOLD = 25;
 
+var getLineHeight = function () {
+  var lineHeight = 0;
+  return function () {
+    if (lineHeight === 0) {
+      lineHeight = (0, _utils.getDefaultLineHeight)() || 18;
+    }
+    return lineHeight;
+  };
+}();
+
 var DateTimePipcker = function (_React$Component) {
   _inherits(DateTimePipcker, _React$Component);
 
@@ -1123,7 +1146,7 @@ var DateTimePipcker = function (_React$Component) {
   }, {
     key: 'onWheel',
     value: function onWheel(event) {
-      this._deltaY += event.deltaY;
+      this._deltaY += event.deltaY * (event.deltaMode === WheelEvent.DOM_DELTA_LINE ? getLineHeight() : 1);
       if (Math.abs(this._deltaY) < TRACK_PAD_SCROLL_THRESHOLD) {
         return;
       }

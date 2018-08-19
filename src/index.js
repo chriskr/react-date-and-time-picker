@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {MONTH_NAMES} from './ui_strings';
-import {classes, Enum, TargetManager} from './utils';
+import {classes, Enum, TargetManager, getDefaultLineHeight} from './utils';
 import classNames from './classNames';
 import Month from './month';
 import SelectMonth from './selectMonth';
@@ -80,6 +80,16 @@ const modeViewsMap = new Map([
 ]);
 
 const TRACK_PAD_SCROLL_THRESHOLD = 25;
+
+const getLineHeight = (() => {
+  let lineHeight = 0;
+  return () => {
+    if (lineHeight === 0) {
+      lineHeight = getDefaultLineHeight() || 18;
+    }
+    return lineHeight;
+  };
+})();
 
 class DateTimePipcker extends React.Component {
   constructor (props) {
@@ -209,7 +219,11 @@ class DateTimePipcker extends React.Component {
   }
 
   onWheel (event) {
-    this._deltaY += event.deltaY;
+    this._deltaY += event.deltaY * (
+      event.deltaMode === WheelEvent.DOM_DELTA_LINE ?
+        getLineHeight() :
+        1
+    );
     if (Math.abs(this._deltaY) < TRACK_PAD_SCROLL_THRESHOLD) {
       return;
     }

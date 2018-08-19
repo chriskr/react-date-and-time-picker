@@ -50,3 +50,16 @@ export class TargetManager {
     return {};
   }
 }
+
+export const getDefaultLineHeight = () => {
+  const iframe = document.createElement('iframe');
+  iframe.src = 'about:blank';
+  document.body.appendChild(iframe);
+  const iframeDocument = iframe.contentWindow.document;
+  const span = iframeDocument.createElement('span');
+  iframeDocument.body.appendChild(span);
+  span.textContent = 'a';
+  const lineHeight = span.offsetHeight;
+  iframe.remove();
+  return lineHeight;
+};
