@@ -6,7 +6,7 @@
   "homepage": "https://chriskr.github.io/react-date-and-time-picker/example/build/",
   "main": "index.js",
   "author": "chriskr",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "keywords": [
     "calendar",
     "date",

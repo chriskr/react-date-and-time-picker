@@ -86,9 +86,9 @@ class DateTimePipcker extends React.Component {
     super(props);
     this.state = {
       mode: DAYS,
-      date: new Date(this.props.date),
       deltaYear: 0,
       startDate: new Date(this.props.date),
+      selectedDate: this.props.date.getDate(),
     };
     this.onClick = this.onClick.bind(this);
     this.onWheel = this.onWheel.bind(this);
@@ -96,20 +96,14 @@ class DateTimePipcker extends React.Component {
     this._deltaY = 0;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      date: new Date(nextProps.date),
-      deltaYear: 0,
-    });
-  }
-
   onClick (event) {
     const {target, className} = targetManager.getTarget(event);
 
     switch (className) {
     case SELECT_DAY: {
-      const date = new Date(this.state.date);
+      const date = new Date(this.props.date);
       date.setDate(Number.parseInt(target.textContent, 10));
+      this.setState({selectedDate: date.getDate()});
       this.props.onChange(date);
       break;
     }
@@ -119,9 +113,9 @@ class DateTimePipcker extends React.Component {
       switch (this.state.mode) {
       case DAYS: {
         const delta = className === PREVIOUS_MONTH ? -1 : 1;
-        const date = new Date(this.state.date);
-        date.setMonth(date.getMonth() + delta);
-        this.setState({date});
+        const date = new Date(this.props.date);
+        this.setMonth(date, date.getMonth() + delta);
+        this.props.onChange(date);
         break;
       }
 
@@ -134,7 +128,7 @@ class DateTimePipcker extends React.Component {
 
       case TIME: {
         const delta = className === PREVIOUS_MONTH ? -15 : 15;
-        const date = new Date(this.state.date);
+        const date = new Date(this.props.date);
         let minutes = date.getMinutes();
         if (minutes % 15 !== 0) {
           minutes = Math.round(minutes / 15) * 15;
@@ -160,9 +154,10 @@ class DateTimePipcker extends React.Component {
       break;
 
     case SELECT_MONTH: {
-      const date = new Date(this.state.date);
-      date.setMonth(Number.parseInt(target.dataset.month, 10));
-      this.setState({mode: DAYS, date});
+      const date = new Date(this.props.date);
+      this.setMonth(date, Number.parseInt(target.dataset.month, 10));
+      this.setState({mode: DAYS});
+      this.props.onChange(date);
       break;
     }
 
@@ -172,16 +167,17 @@ class DateTimePipcker extends React.Component {
       break;
 
     case SELECT_YEAR: {
-      const date = new Date(this.state.date);
-      date.setFullYear(Number.parseInt(target.textContent, 10));
-      this.setState({mode: DAYS, date, deltaYear: 0});
+      const date = new Date(this.props.date);
+      this.setYear(date, Number.parseInt(target.textContent, 10));
+      this.setState({mode: DAYS, deltaYear: 0});
+      this.props.onChange(date);
       break;
     }
 
     case NEXT_HOUR:
     case PREVIOUS_HOUR: {
       const delta = className === PREVIOUS_HOUR ? -1 : 1;
-      const date = new Date(this.state.date);
+      const date = new Date(this.props.date);
       date.setHours(date.getHours() + delta);
       this.props.onChange(date);
       break;
@@ -190,7 +186,7 @@ class DateTimePipcker extends React.Component {
     case NEXT_MINUTE:
     case PREVIOUS_MINUTE: {
       const delta = className === PREVIOUS_MINUTE ? -1 : 1;
-      const date = new Date(this.state.date);
+      const date = new Date(this.props.date);
       date.setMinutes(date.getMinutes() + delta);
       this.props.onChange(date);
       break;
@@ -229,7 +225,7 @@ class DateTimePipcker extends React.Component {
     case TIME: {
       const box = this._pickerBody.getBoundingClientRect();
       const delta = event.deltaY > 0 ? 1 : -1;
-      const date = new Date(this.state.date);
+      const date = new Date(this.props.date);
       if (event.clientX < (box.left + box.width / 2)) {
         date.setHours(date.getHours() + delta);
       } else {
@@ -240,6 +236,38 @@ class DateTimePipcker extends React.Component {
     }
 
     default:
+    }
+  }
+
+  setYear (date, year) {
+    const month = date.getMonth();
+    date.setFullYear(year);
+    this.retainMonthAndSelectedDate(date, month);
+  }
+
+  setMonth (date, month) {
+    date.setMonth(month);
+    this.retainMonthAndSelectedDate(date, month);
+  }
+
+  retainMonthAndSelectedDate (date, month) {
+    while (month < 0) {
+      month = (month + 12) % 12;
+    }
+    if (date.getMonth() > month) {
+      while (date.getMonth() > month) {
+        date.setDate(date.getDate() - 1);
+      }
+    } else if (date.getDate() < this.state.selectedDate) {
+      const testDate = new Date(date);
+      while (date.getDate() < this.state.selectedDate) {
+        testDate.setDate(date.getDate() + 1);
+        if (date.getMonth() === testDate.getMonth()) {
+          date.setDate(date.getDate() + 1);
+        } else {
+          break;
+        }
+      }
     }
   }
 
@@ -256,8 +284,8 @@ class DateTimePipcker extends React.Component {
 
     case TIME:
       return (
-        <Time hours={this.state.date.getHours()}
-          minutes={this.state.date.getMinutes()}
+        <Time hours={this.props.date.getHours()}
+          minutes={this.props.date.getMinutes()}
         />
       );
     default:
@@ -266,7 +294,7 @@ class DateTimePipcker extends React.Component {
   }
 
   render() {
-    const date = this.state.date;
+    const date = this.props.date;
     const year = date.getFullYear();
     const month = date.getMonth();
     const selected = {
