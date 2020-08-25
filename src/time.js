@@ -46,14 +46,13 @@ Controls.propTypes = {
   useRoundMaterialIcons: PropTypes.bool,
 };
 
-const Time = (props) => {
-  const {hours, minutes} = props;
+const Time = ({hours, minutes, useRoundMaterialIcons}) => {
   return (
     <div className={TIME_CONTAINER}>
       <Controls
         previous={PREVIOUS_HOUR}
         next={NEXT_HOUR}
-        useRoundMaterialIcons={this.props.useRoundMaterialIcons}
+        useRoundMaterialIcons={useRoundMaterialIcons}
       />
       <svg viewBox="0 0 140 51"
         width="140px"
@@ -81,7 +80,7 @@ const Time = (props) => {
       <Controls
         previous={PREVIOUS_MINUTE}
         next={NEXT_MINUTE}
-        useRoundMaterialIcons={this.props.useRoundMaterialIcons}
+        useRoundMaterialIcons={useRoundMaterialIcons}
       />
     </div>
   );
