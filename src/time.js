@@ -15,16 +15,27 @@ const {
   ICON_EXPAND_LESS,
   ICON_EXPAND_MORE,
   MATERIAL_ICONS,
+  MATERIAL_ICONS_ROUND,
   DIGITS,
 } = classNames;
 
-const Controls = ({next, previous}) =>
+const Controls = ({next, previous, useRoundMaterialIcons}) =>
   <div className={TIME_CONTROLS}>
     <span className={classes(HOVER_SPAN, previous)}>
-      <i className={classes(MATERIAL_ICONS, ICON_EXPAND_LESS)}/>
+      <i className={classes(
+        MATERIAL_ICONS,
+        useRoundMaterialIcons && MATERIAL_ICONS_ROUND,
+        ICON_EXPAND_LESS
+      )}
+      />
     </span>
     <span className={classes(HOVER_SPAN, next)}>
-      <i className={classes(MATERIAL_ICONS, ICON_EXPAND_MORE)}/>
+      <i className={classes(
+        MATERIAL_ICONS,
+        useRoundMaterialIcons && MATERIAL_ICONS_ROUND,
+        ICON_EXPAND_MORE
+      )}
+      />
     </span>
   </div>
 ;
@@ -32,13 +43,18 @@ const Controls = ({next, previous}) =>
 Controls.propTypes = {
   next: PropTypes.string,
   previous: PropTypes.string,
+  useRoundMaterialIcons: PropTypes.bool,
 };
 
 const Time = (props) => {
   const {hours, minutes} = props;
   return (
     <div className={TIME_CONTAINER}>
-      <Controls previous={PREVIOUS_HOUR} next={NEXT_HOUR}/>
+      <Controls
+        previous={PREVIOUS_HOUR}
+        next={NEXT_HOUR}
+        useRoundMaterialIcons={this.props.useRoundMaterialIcons}
+      />
       <svg viewBox="0 0 140 51"
         width="140px"
         height="51px"
@@ -62,7 +78,11 @@ const Time = (props) => {
           <Digit digit={minutes % 10} pos={0}/>
         </g>
       </svg>
-      <Controls previous={PREVIOUS_MINUTE} next={NEXT_MINUTE}/>
+      <Controls
+        previous={PREVIOUS_MINUTE}
+        next={NEXT_MINUTE}
+        useRoundMaterialIcons={this.props.useRoundMaterialIcons}
+      />
     </div>
   );
 };
@@ -70,6 +90,7 @@ const Time = (props) => {
 Time.propTypes = {
   hours: PropTypes.number,
   minutes: PropTypes.number,
+  useRoundMaterialIcons: PropTypes.bool,
 };
 
 export default Time;
