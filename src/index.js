@@ -43,6 +43,7 @@ const {
   ICON_ADJUST,
   ICON_CANCEL,
   MATERIAL_ICONS,
+  MATERIAL_ICONS_ROUND,
 } = classNames;
 
 const targetManager = new TargetManager({
@@ -91,7 +92,7 @@ const getLineHeight = (() => {
   };
 })();
 
-class DateTimePipcker extends React.Component {
+class DateTimePicker extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -298,8 +299,10 @@ class DateTimePipcker extends React.Component {
 
     case TIME:
       return (
-        <Time hours={this.props.date.getHours()}
+        <Time
+          hours={this.props.date.getHours()}
           minutes={this.props.date.getMinutes()}
+          useRoundMaterialIcons={this.props.useRoundMaterialIcons}
         />
       );
     default:
@@ -323,7 +326,12 @@ class DateTimePipcker extends React.Component {
       >
         <div className={HEADER_ROW}>
           <span className={classes(HOVER_SPAN, PREVIOUS_MONTH)}>
-            <i className={classes(MATERIAL_ICONS, ICON_CHEVRON_LEFT)}/>
+            <i className={classes(
+              MATERIAL_ICONS,
+              this.props.useRoundMaterialIcons && MATERIAL_ICONS_ROUND,
+              ICON_CHEVRON_LEFT
+            )}
+            />
           </span>
           <span className={FILLER}/>
           <span className={classes(HOVER_SPAN, HEADER_MONTH,
@@ -338,7 +346,12 @@ class DateTimePipcker extends React.Component {
           </span>
           <span className={FILLER}/>
           <span className={classes(HOVER_SPAN, NEXT_MONTH)}>
-            <i className={classes(MATERIAL_ICONS, ICON_CHEVRON_RIGHT)}/>
+            <i className={classes(
+              MATERIAL_ICONS,
+              this.props.useRoundMaterialIcons && MATERIAL_ICONS_ROUND,
+              ICON_CHEVRON_RIGHT
+            )}
+            />
           </span>
         </div>
         <div ref={div => {this._pickerBody = div;}}
@@ -349,16 +362,27 @@ class DateTimePipcker extends React.Component {
         <div className={FOOTER_ROW}>
           <span className={classes(HOVER_SPAN, SELECT_TIME)}>
             <i className={classes(MATERIAL_ICONS,
+              this.props.useRoundMaterialIcons && MATERIAL_ICONS_ROUND,
               this.state.mode === TIME ?
                 ICON_EVENT :
                 ICON_SCHEDULE)}
             />
           </span>
           <span className={classes(HOVER_SPAN, SELECT_TODAY)}>
-            <i className={classes(MATERIAL_ICONS, ICON_ADJUST)}/>
+            <i className={classes(
+              MATERIAL_ICONS,
+              this.props.useRoundMaterialIcons && MATERIAL_ICONS_ROUND,
+              ICON_ADJUST
+            )}
+            />
           </span>
           <span className={classes(HOVER_SPAN, CANCEL_CHANGES)}>
-            <i className={classes(MATERIAL_ICONS, ICON_CANCEL)}/>
+            <i className={classes(
+              MATERIAL_ICONS,
+              this.props.useRoundMaterialIcons && MATERIAL_ICONS_ROUND,
+              ICON_CANCEL
+            )}
+            />
           </span>
         </div>
       </div>
@@ -366,9 +390,10 @@ class DateTimePipcker extends React.Component {
   }
 }
 
-DateTimePipcker.propTypes = {
+DateTimePicker.propTypes = {
   date: PropTypes.instanceOf(Date),
   onChange: PropTypes.func,
+  useRoundMaterialIcons: PropTypes.bool,
 };
 
-export default DateTimePipcker;
+export default DateTimePicker;

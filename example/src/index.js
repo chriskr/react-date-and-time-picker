@@ -26,7 +26,7 @@ const onChange = newDate => {
   renderPicker();
 };
 
-const updateInput = date => input.value = date.toGMTString();
+const updateInput = date => input.value = date.toUTCString();
 
 const onClick = event => {
   if (!(pickerContainer.contains(event.target) || event.target === input)) {
