@@ -1240,9 +1240,10 @@ Controls.propTypes = {
   useRoundMaterialIcons: _propTypes2.default.bool
 };
 
-var Time = function Time(props) {
-  var hours = props.hours,
-      minutes = props.minutes;
+var Time = function Time(_ref2) {
+  var hours = _ref2.hours,
+      minutes = _ref2.minutes,
+      useRoundMaterialIcons = _ref2.useRoundMaterialIcons;
 
   return _react2.default.createElement(
     'div',
@@ -1250,7 +1251,7 @@ var Time = function Time(props) {
     _react2.default.createElement(Controls, {
       previous: PREVIOUS_HOUR,
       next: NEXT_HOUR,
-      useRoundMaterialIcons: undefined.props.useRoundMaterialIcons
+      useRoundMaterialIcons: useRoundMaterialIcons
     }),
     _react2.default.createElement(
       'svg',
@@ -1288,7 +1289,7 @@ var Time = function Time(props) {
     _react2.default.createElement(Controls, {
       previous: PREVIOUS_MINUTE,
       next: NEXT_MINUTE,
-      useRoundMaterialIcons: undefined.props.useRoundMaterialIcons
+      useRoundMaterialIcons: useRoundMaterialIcons
     })
   );
 };
