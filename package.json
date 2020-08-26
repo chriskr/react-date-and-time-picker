@@ -1,6 +1,6 @@
 {
   "name": "react-date-and-time-picker",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "description": "React component to pick date and time (with material design icons).",
   "repository": "https://github.com/chriskr/react-date-and-time-picker",
   "homepage": "https://chriskr.github.io/react-date-and-time-picker/example/build/",
